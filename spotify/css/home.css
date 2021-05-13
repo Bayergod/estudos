@@ -183,7 +183,7 @@ html,body{
 
 .player__control{
     width: 70%;
-    text-align: center;
+    text-align: center; 
 }
 
 .player__control__buttons a{

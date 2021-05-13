@@ -69,61 +69,36 @@
 
             <div class="main__row">
                 <div class="main__row__title"><h2>Paradas</h2></div>
-                <div class="main__col">
-                    <img src="img/" alt="">
-                    <h3>As 50 mais tocadas</h3>
+                <div class="main__col" data-image="img/costagold2.jpg" data-artist="Costa gold" data-song="UAU" data-file="assets/costagold-uau.mp3">
+                    <img src="img/costagold2.jpg">
+                    <h3>Costa gold UAU</h3>
+                    <p>UAU costa gold</p>
+                </div>
+                <div class="main__col" data-image="img/sidoka.png" data-artist="Sidoka" data-song="Petalaz" data-file="assets/sidoka-petalaz.mp3">
+                    <img src="img/sidoka.png">
+                    <h3>Sidoka petalaz</h3>
                     <p>aqui vai a descrição</p>
                 </div>
-                <div class="main__col">
-                    <img src="img/top50.png" alt="">
-                    <h3>As 50 mais tocadas</h3>
+                <div class="main__col" data-image="img/jovemdex.jpg" data-artist="Jovem dex" data-song="tapa" data-file="assets/jovemdex-tapa.mp3">
+                    <img src="img/jovemdex.jpg" >
+                    <h3>Jovem dex jovemdex-tapa</h3>
                     <p>aqui vai a descrição</p>
                 </div>
-                <div class="main__col">
-                    <img src="img/top50.png" alt="">
-                    <h3>As 50 mais tocadas</h3>
-                    <p>aqui vai a descrição</p>
-                </div>
-                <div class="main__col">
-                    <img src="img/top50.png" alt="">
-                    <h3>As 50 mais tocadas</h3>
-                    <p>aqui vai a descrição</p>
-                </div>
-                <div class="main__col">
-                    <img src="img/top50.png" alt="">
-                    <h3>As 50 mais tocadas</h3>
-                    <p>aqui vai a descrição</p>
-                </div>
-                <div class="main__col">
-                    <img src="img/top50.png" alt="">
-                    <h3>As 50 mais tocadas</h3>
-                    <p>aqui vai a descrição</p>
-                </div>
-                <div class="main__col">
-                    <img src="img/top50.png" alt="">
-                    <h3>As 50 mais tocadas</h3>
-                    <p>aqui vai a descrição</p>
-                </div>
-                <div class="main__col">
-                    <img src="img/top50.png" alt="">
-                    <h3>As 50 mais tocadas</h3>
-                    <p>aqui vai a descrição</p>
-                </div>
-                <div class="main__col">
-                    <img src="img/top50.png" alt="">
-                    <h3>As 50 mais tocadas</h3>
+                <div class="main__col" data-image="img/recayd.png" data-artist="Recayd Mob" data-song="Nicole bahls" data-file="assets/recaydmob-nicolebals.mp3">
+                    <img src="img/recayd.png">
+                    <h3>Recayd Mob nicole bals</h3>
                     <p>aqui vai a descrição</p>
                 </div>
             </div><!--main row-->
 
             <div class="main__row">
                 <div class="main__row__title"><h2>Minhas musicas</h2></div>
-                <div class="main__col">
+                <div class="main__col" data-image="img/trap.jfif" data-artist="Trapzando" data-song="777-666" data-file="assets/matue-777-666.mp3">
                     <img src="img/trap.jfif" alt="">
                     <h3>Trapzada</h3>
                     <p>aqui vai a descrição</p>
                 </div>
-                <div class="main__col" data-image="img/costagold.jpg" data-artist="Costa gold" data-song="Nada bom" data-file="assets/music.mp3" >
+                <div class="main__col" data-image="img/costagold.jpg" data-artist="Costa gold" data-song="Nada bom" data-file="assets/costagold-nadabompt3.mp3" >
                     <img src="img/costagold.jpg" alt="">
                     <h3>Costa Gold</h3>
                     <p>nadabom pt.3</p>
@@ -154,7 +129,7 @@
         </div><!--player control-->
     </div><!--player-->
     
-    <audio id="audioplayer" style="position: absolute; left: 0; top: 0;z-index: -999;opacity: 0;" controls="">
+    <audio id="audioplayer"style="position: absolute; left: 0; top: 0;z-index: -999;opacity: 0;" controls="">
 
     </audio>
     <script src="javascript/all.min.js"></script>
@@ -164,11 +139,20 @@
         var loaded = false;
         var playBtn = document.getElementById('playBtn');
         var pauseBtn = document.getElementById('pauseBtn');
+
         pauseBtn.addEventListener('click' ,(e)=>{
             e.preventDefault();
             playBtn.style.display = "inline";
             pauseBtn.style.display = "none";
+            audioPlayer.pause();
+            return false;
+        });
 
+        playBtn.addEventListener('click' ,(e)=>{
+            e.preventDefault();
+            playBtn.style.display = "none";
+            pauseBtn.style.display = "inline";
+            audioPlayer.play();
             return false;
         });
 
@@ -181,6 +165,24 @@
             playBtn.style.display = "none";
             pauseBtn.style.display = "inline";
         }
+
+        document.querySelectorAll('.main__col').forEach(item => {
+            item.addEventListener('click',event => {
+                let image = item.getAttribute('data-image');
+                let artist = item.getAttribute('data-artist');
+                let song = item.getAttribute('data-song');
+                let file = item.getAttribute('data-file');
+
+                let playerArtistComponent = document.getElementsByClassName('player__artist');
+
+                playerArtistComponent[0].innerHTML = `
+                    <img src="`+image+`"/>
+                    <h3>`+artist+`<br/><span>`+song+`</span></h3>
+                `;
+
+                playSong(file);
+            })
+        });
 
     </script>
 </body>
