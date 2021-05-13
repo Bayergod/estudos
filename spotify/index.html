@@ -139,8 +139,8 @@
         <div class="player__control">
             <div class="player__control__buttons">
                 <a href=""> <i class="fas fa-backward"></i></a>
-                <a style="display: none;" id="pauseBtn" href=""><i class="far fa-pause-circle"></i>></a>
-                <a id="playBtn" href=""><i class="far fa-play-circle"></i>></a>
+                <a style="display: none;" id="pauseBtn" href=""><i class="far fa-pause-circle"></i></a>
+                <a id="playBtn" href=""> <i class="far fa-play-circle"></i></a>
                 <a href=""> <i class="fas fa-forward"></i></a>
 
 
@@ -153,6 +153,35 @@
             </div><!--player control progress-->
         </div><!--player control-->
     </div><!--player-->
+    
+    <audio id="audioplayer" style="position: absolute; left: 0; top: 0;z-index: -999;opacity: 0;" controls="">
+
+    </audio>
     <script src="javascript/all.min.js"></script>
+
+    <script>
+        var audioPlayer = document.getElementById('audioplayer');
+        var loaded = false;
+        var playBtn = document.getElementById('playBtn');
+        var pauseBtn = document.getElementById('pauseBtn');
+        pauseBtn.addEventListener('click' ,(e)=>{
+            e.preventDefault();
+            playBtn.style.display = "inline";
+            pauseBtn.style.display = "none";
+
+            return false;
+        });
+
+        const playSong = (file) => {
+            if(loaded == false){
+                audioPlayer.innerHTML = `<source src="`+file+`" type="audio/mp3"/>`;
+                loaded = true;
+            }
+            audioPlayer.play();
+            playBtn.style.display = "none";
+            pauseBtn.style.display = "inline";
+        }
+
+    </script>
 </body>
 </html>
